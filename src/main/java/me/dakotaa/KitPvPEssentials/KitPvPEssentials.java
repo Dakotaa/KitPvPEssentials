@@ -23,22 +23,15 @@ public class KitPvPEssentials extends JavaPlugin {
         killMessages = new LinkedHashMap<String, KillMessage>();
         gui = new MessageGUI(this);
 
-        loadKillMessages();
-
-        for (String label : killMessages.keySet()) {
-            getLogger().info(killMessages.get(label).getLabel());
-            getLogger().info(killMessages.get(label).getMessage());
-        }
-
+        // Load or create playerdata and config.
         try {
             playerDataFile = new PluginFile(this, "PlayerData.yml", "PlayerData.yml");
         } catch (Exception e) {
             getLogger().info("Failed to load player data file: " + e.toString());
         }
 
-        loadPlayerData(playerDataFile);
 
-
+        saveDefaultConfig();
 
 
         // Initialize event listener and commands
@@ -55,7 +48,8 @@ public class KitPvPEssentials extends JavaPlugin {
             }
         }, 20L, 1200L);
 
-        saveDefaultConfig();
+        loadKillMessages();
+        loadPlayerData(playerDataFile);
 
         getLogger().info("Plugin enabled.");
     }
@@ -108,18 +102,22 @@ public class KitPvPEssentials extends JavaPlugin {
         getLogger().info("Player data saved.");
     }
 
+    public void createPlayerData(Player p) {
+        database.put(p.getUniqueId(), new PlayerData(p.getUniqueId(), p.getPlayerListName(), killMessages.get("default").getMessage(), 0, 0, 0, 0));
+    }
 
     public HashMap<UUID, PlayerData> getDatabase() {
         return database;
     }
 
-    public HashMap<String, KillMessage> getKillMessages() {
+    public LinkedHashMap<String, KillMessage> getKillMessages() {
         return killMessages;
     }
 
     public MessageGUI getMessageGUI() {
         return gui;
     }
+
 
 }
 

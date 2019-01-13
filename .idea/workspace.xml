@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1c20af31-325f-4745-9e5d-18b03c3665a8" name="Default" comment="" />
+    <list default="true" id="1c20af31-325f-4745-9e5d-18b03c3665a8" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/KitPvPEssentials-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/KitPvPEssentials-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/Commands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/Commands.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/EventListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/EventListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/KitPvPEssentials$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/KitPvPEssentials$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/KitPvPEssentials.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/KitPvPEssentials.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/MessageGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/dakotaa/KitPvPEssentials/MessageGUI.class" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,11 +26,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="KitPvPEssentials.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="KitPvPEssentials.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-319">
-              <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+            <state relative-caret-position="799">
+              <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#4063#4064#0" expanded="true" />
@@ -57,8 +70,8 @@
       <file leaf-file-name="Commands.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="50" column="70" lean-forward="true" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
+            <state relative-caret-position="833">
+              <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -69,8 +82,8 @@
       <file leaf-file-name="EventListener.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="777">
-              <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
+            <state relative-caret-position="697">
+              <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,11 +91,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MessageGUI.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MessageGUI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="650">
-              <caret line="69" column="46" lean-forward="true" selection-start-line="69" selection-start-column="46" selection-end-line="69" selection-end-column="46" />
+            <state relative-caret-position="565">
+              <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,8 +106,8 @@
       <file leaf-file-name="PlayerData.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PlayerData.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-16">
-              <caret column="36" selection-start-column="36" selection-end-column="36" />
+            <state relative-caret-position="374">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
               <folding>
                 <element signature="e#718#719#0" expanded="true" />
                 <element signature="e#752#753#0" expanded="true" />
@@ -108,7 +121,7 @@
       <file leaf-file-name="PluginFile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PluginFile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
+            <state relative-caret-position="255">
               <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -160,11 +173,11 @@
         <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PlayerData.java" />
         <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
         <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KillMessage.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java" />
         <option value="$PROJECT_DIR$/src/main/resources/config.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java" />
         <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java" />
+        <option value="$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java" />
       </list>
     </option>
   </component>
@@ -322,7 +335,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -330,7 +342,7 @@
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info active="true" anchor="right" id="Maven Projects" order="3" visible="true" weight="0.09335937" />
+      <window_info active="true" anchor="right" id="Maven Projects" order="3" visible="true" weight="0.044921875" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.12605688" />
       <window_info anchor="bottom" id="Terminal" order="7" />
@@ -458,40 +470,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/PlayerData.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="22" selection-start-column="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PluginFile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
+        <state relative-caret-position="255">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PlayerData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-16">
-          <caret column="36" selection-start-column="36" selection-end-column="36" />
-          <folding>
-            <element signature="e#718#719#0" expanded="true" />
-            <element signature="e#752#753#0" expanded="true" />
-            <element signature="e#806#807#0" expanded="true" />
-            <element signature="e#852#853#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="850">
-          <caret line="50" column="70" lean-forward="true" selection-start-line="50" selection-start-column="70" selection-end-line="50" selection-end-column="70" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -519,6 +501,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="22" selection-start-column="22" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -526,10 +515,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="565">
+          <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="41" column="61" selection-start-line="41" selection-start-column="61" selection-end-line="41" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/PlayerData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+          <folding>
+            <element signature="e#718#719#0" expanded="true" />
+            <element signature="e#752#753#0" expanded="true" />
+            <element signature="e#806#807#0" expanded="true" />
+            <element signature="e#852#853#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/Commands.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="49" column="58" selection-start-line="49" selection-start-column="58" selection-end-line="49" selection-end-column="58" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/KitPvPEssentials.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-319">
-          <caret line="18" column="13" lean-forward="true" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        <state relative-caret-position="799">
+          <caret line="51" column="39" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#4063#4064#0" expanded="true" />
@@ -538,26 +570,6 @@
             <element signature="e#4190#4191#0" expanded="true" />
             <element signature="e#4231#4232#0" expanded="true" />
             <element signature="e#4257#4258#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/EventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="777">
-          <caret line="70" column="31" selection-start-line="70" selection-start-column="31" selection-end-line="70" selection-end-column="31" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/dakotaa/KitPvPEssentials/MessageGUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="650">
-          <caret line="69" column="46" lean-forward="true" selection-start-line="69" selection-start-column="46" selection-end-line="69" selection-end-column="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

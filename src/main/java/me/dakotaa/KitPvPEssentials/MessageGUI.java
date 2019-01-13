@@ -12,15 +12,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.UUID;
+import java.util.*;
 
 public class MessageGUI implements Listener {
     KitPvPEssentials plugin;
     private HashMap<UUID, PlayerData> database;
-    private HashMap<String, KillMessage> killMessages;
+    private LinkedHashMap<String, KillMessage> killMessages;
 
     private final Inventory inv;
 
@@ -70,6 +67,10 @@ public class MessageGUI implements Listener {
         Player p = (Player) e.getWhoClicked();
         ItemStack clickedItem = e.getCurrentItem();
 
+        if (!database.containsKey(p.getUniqueId())) {
+            plugin.createPlayerData(p);
+        }
+
         if (clickedItem == null || clickedItem.getType().equals(Material.AIR)) {
             return;
         }
@@ -78,9 +79,10 @@ public class MessageGUI implements Listener {
 
         // Checks through the existing kill message orders to see if the inventory slot clicked matches with any kill message. If it does, sets the player's kill message.
         for (String label : killMessages.keySet()) {
+            Bukkit.getLogger().info(killMessages.get(label).getMessage());
             if (killMessages.get(label).getOrder() == e.getRawSlot()+1) {
                 database.get(p.getUniqueId()).setKillMessage(killMessages.get(label).getMessage());
-                p.sendMessage("&eYou have set your kill message to " + killMessages.get(label).getMessage());
+                p.sendMessage(ChatColor.translateAlternateColorCodes('&',"&eYou have set your kill message to " + killMessages.get(label).getMessage().replace("%killer%", "PLAYER").replace("%victim%", "PLAYER").replace("%killstreak%", "")));
                 break;
             }
         }
