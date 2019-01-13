@@ -1,0 +1,8 @@
+name: KitPvPEssentials
+version: 1.0
+author: Dakotaa
+main: me.dakotaa.KitPvPEssentials.KitPvPEssentials
+commands:
+   kitpvpe:
+      description: Main command
+      usage: Incorrect command usage.

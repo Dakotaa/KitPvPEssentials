@@ -1,0 +1,13 @@
+KillMessages:
+    default:
+        label: "&aDefault"
+        message: "&f%killer% &7killed &f%victim%. %killstreak%"
+        order: 1
+    smacked:
+        label: "&2Smacked"
+        message: "&f%killer% &a&osmacked &f%victim%. %killstreak%"
+        order: 2
+    rekt:
+        label: "&4Rekt"
+        message: "&f%killer% &c&orekt &f%victim%. %killstreak%"
+        order: 3
