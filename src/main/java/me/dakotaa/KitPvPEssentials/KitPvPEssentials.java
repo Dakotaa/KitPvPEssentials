@@ -19,7 +19,11 @@ public class KitPvPEssentials extends JavaPlugin {
     @Override
     public void onEnable() {
 
+        // Hashmap to store player data by UUID.
         database = new HashMap<UUID, PlayerData>();
+
+        // Kill message hashmap. Kill message data loaded into here from the config.yml.
+        // Linked hashmap so order of hashmap matches order of config so the GUI works correctly.
         killMessages = new LinkedHashMap<String, KillMessage>();
         gui = new MessageGUI(this);
 
@@ -30,9 +34,7 @@ public class KitPvPEssentials extends JavaPlugin {
             getLogger().info("Failed to load player data file: " + e.toString());
         }
 
-
         saveDefaultConfig();
-
 
         // Initialize event listener and commands
         getServer().getPluginManager().registerEvents(new EventListener(this), this);
@@ -70,6 +72,7 @@ public class KitPvPEssentials extends JavaPlugin {
         }
     }
 
+    // Load the kill message info from the config, placing each configured kill message into the killMessages hashmap.
     private void loadKillMessages() {
         for (String label : getConfig().getConfigurationSection("KillMessages").getKeys(false)) {
             String path = "KillMessages." + label;
@@ -78,6 +81,7 @@ public class KitPvPEssentials extends JavaPlugin {
         }
     }
 
+    // Write the player data for each player in the database hashmap to the PlayerData.yml file.
     private void writePlayerData() {
         for (UUID UUID: database.keySet()) {
             String UUIDs = UUID.toString();
@@ -102,6 +106,7 @@ public class KitPvPEssentials extends JavaPlugin {
         getLogger().info("Player data saved.");
     }
 
+    // Used to add empty player data to the database hashmap to initialize players without any data.
     public void createPlayerData(Player p) {
         database.put(p.getUniqueId(), new PlayerData(p.getUniqueId(), p.getPlayerListName(), killMessages.get("default").getMessage(), 0, 0, 0, 0));
     }

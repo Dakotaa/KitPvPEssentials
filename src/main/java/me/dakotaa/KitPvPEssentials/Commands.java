@@ -24,9 +24,13 @@ public class Commands implements CommandExecutor {
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
         Player sender = (Player) commandSender;
+
         if (args.length == 0) {
             return false;
         }
+
+
+        // Player stats command
         if (args[0].equalsIgnoreCase("stats")) {
             if (args.length == 1) {
                 inspectPlayer(sender, sender.getPlayerListName());
@@ -35,15 +39,23 @@ public class Commands implements CommandExecutor {
                 inspectPlayer(sender, args[1]);
                 return true;
             }
+
+
+        // Kill message selection
         } else if (args[0].equalsIgnoreCase("message")) {
             MessageGUI gui = new MessageGUI(plugin);
             gui.openInventory(sender);
+            return true;
+
+
         } else {
             return false;
         }
+
         return false;
     }
 
+    // Lookup a player and print the player's stats to the specified receiver.
     private void inspectPlayer(Player sender, String target) {
         Player lookup = Bukkit.getPlayer(target);
 

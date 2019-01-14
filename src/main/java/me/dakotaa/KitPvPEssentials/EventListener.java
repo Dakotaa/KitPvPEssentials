@@ -24,6 +24,7 @@ public class EventListener implements Listener {
         this.killMessages = plugin.getKillMessages();
     }
 
+    // Create PlayerData object for player on login if they do not have any.
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
@@ -33,6 +34,7 @@ public class EventListener implements Listener {
         }
     }
 
+    // Handles the changing of stats and sending death message when a player is killed in PvP.
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent e) {
         Player victim = e.getEntity();
@@ -81,7 +83,8 @@ public class EventListener implements Listener {
         }
     }
 
-    // function to decide which killstreak message to use.
+    // Returns the correct killstreak message string depending on the given player's current killstreak.
+    // TODO: load kill streak tiers, messages, and rewards from config
     private String killStreakMessage(Player player) {
         PlayerData playerData = database.get(player.getUniqueId());
         if (playerData.getCurrentStreak() > 5) {
