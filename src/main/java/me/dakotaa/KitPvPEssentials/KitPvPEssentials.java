@@ -12,6 +12,13 @@ import java.util.UUID;
 
 import static java.lang.String.valueOf;
 
+// TODO: Leaderboard (most kills)
+    // ten per page, multiple pages
+// TODO: Partial kill system
+    // calculate damage done per player when someone is killed, split money accordingly
+    // Highest damage gets kill, second highest gets assist
+// TODO: Change data storage (sqlLite?)
+
 public class KitPvPEssentials extends JavaPlugin {
 
     private HashMap<UUID, PlayerData> database;
@@ -72,7 +79,7 @@ public class KitPvPEssentials extends JavaPlugin {
     private void loadPlayerData(PluginFile data) {
         for (String UUID : data.getKeys(false)) {
             try {
-                database.put(java.util.UUID.fromString(UUID), new PlayerData(java.util.UUID.fromString(UUID), data.getString(UUID + ".username"), killMessages.get("default").getMessage(), data.getInt(UUID + ".kills"), data.getInt(UUID + ".deaths"), data.getInt(UUID + "currentStreak"), data.getInt(UUID + ".highestStreak")));
+                database.put(java.util.UUID.fromString(UUID), new PlayerData(java.util.UUID.fromString(UUID), data.getString(UUID + ".username"), killMessages.get("default").getMessage(), data.getInt(UUID + ".kills"), data.getInt(UUID + ".assists"), data.getInt(UUID + ".deaths"), data.getInt(UUID + "currentStreak"), data.getInt(UUID + ".highestStreak")));
             } catch (Exception e) {
                 getLogger().info("Failed to load player data of " + UUID + ": " + e.toString());
             }
@@ -114,6 +121,7 @@ public class KitPvPEssentials extends JavaPlugin {
             try {
                 playerDataFile.set(UUID + ".username", Bukkit.getOfflinePlayer(UUID).getName());
                 playerDataFile.set(UUID + ".kills", database.get(UUID).getKills());
+                playerDataFile.set(UUID + ".assists", database.get(UUID).getAssists());
                 playerDataFile.set(UUID + ".deaths", database.get(UUID).getDeaths());
                 playerDataFile.set(UUID + ".currentStreak", database.get(UUID).getCurrentStreak());
                 playerDataFile.set(UUID + ".highestStreak", database.get(UUID).getHighestStreak());
@@ -128,7 +136,7 @@ public class KitPvPEssentials extends JavaPlugin {
 
     // Used to add empty player data to the database hashmap to initialize players without any data.
     public void createPlayerData(Player p) {
-        database.put(p.getUniqueId(), new PlayerData(p.getUniqueId(), p.getPlayerListName(), killMessages.get("default").getMessage(), 0, 0, 0, 0));
+        database.put(p.getUniqueId(), new PlayerData(p.getUniqueId(), p.getPlayerListName(), killMessages.get("default").getMessage(), 0, 0, 0, 0, 0));
     }
 
     public HashMap<UUID, PlayerData> getDatabase() {

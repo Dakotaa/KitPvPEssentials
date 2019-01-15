@@ -68,6 +68,7 @@ public class Commands implements CommandExecutor {
             PlayerData playerData = database.get(lookup.getUniqueId());
             sender.sendMessage("stats of " + lookup.getDisplayName());
             sender.sendMessage("Kills: " + playerData.getKills());
+            sender.sendMessage("Assists: " + playerData.getAssists());
             sender.sendMessage("Deaths: " + playerData.getDeaths());
             if (playerData.getDeaths() == 0) {
                 sender.sendMessage("K/D Radio: " + (playerData.getKills()));

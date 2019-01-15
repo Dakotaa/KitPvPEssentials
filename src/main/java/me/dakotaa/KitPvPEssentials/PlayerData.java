@@ -1,21 +1,45 @@
 package me.dakotaa.KitPvPEssentials;
 
+import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerData {
     private java.util.UUID UUID;
     private String username, killMessage;
-    private int kills, deaths, currentStreak, highestStreak;
+    private int kills, deaths, assists, currentStreak, highestStreak;
+    private HashMap<String, Float> damageReceived;
     Boolean onStreak;
-    public PlayerData(UUID UUID, String username, String killMessage, int kills, int deaths, int currentStreak, int highestStreak) {
+    public PlayerData(UUID UUID, String username, String killMessage, int kills, int assists, int deaths, int currentStreak, int highestStreak) {
         this.UUID = UUID;
         this.username = username;
         this.killMessage = killMessage;
         this.kills = kills;
+        this.assists = assists;
         this.deaths = deaths;
         this.currentStreak = currentStreak;
         this.highestStreak = highestStreak;
         onStreak = false;
+        damageReceived = new HashMap<String, Float>();
+    }
+
+    public void addDamage(String username, Float dmg) {
+        if (damageReceived.containsKey(username)) {
+            damageReceived.put(username, damageReceived.get(username) + dmg);
+        } else {
+            damageReceived.put(username, dmg);
+        }
+    }
+
+    public HashMap<String, Float> getDamageReceived() {
+        return damageReceived;
+    }
+
+    public Float getDamageByPlayer(String username) {
+        return damageReceived.get(username);
+    }
+
+    public void resetDamage() {
+        damageReceived.clear();
     }
 
     public int getCurrentStreak() {
@@ -83,6 +107,18 @@ public class PlayerData {
     public int getKills() {
 
         return kills;
+    }
+
+    public int getAssists() {
+        return assists;
+    }
+
+    public void setAssists(int a) {
+        assists = a;
+    }
+
+    public void increaseAssists() {
+        assists++;
     }
 
     public void setKills(int kills) {
