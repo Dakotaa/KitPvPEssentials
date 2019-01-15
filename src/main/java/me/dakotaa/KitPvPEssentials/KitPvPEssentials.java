@@ -5,14 +5,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+
+import static java.lang.String.valueOf;
 
 public class KitPvPEssentials extends JavaPlugin {
 
     private HashMap<UUID, PlayerData> database;
     private LinkedHashMap<String, KillMessage> killMessages;
+    private HashMap<Integer, KillStreak> killStreaks;
     private PluginFile playerDataFile;
     private MessageGUI gui;
 
@@ -21,6 +25,7 @@ public class KitPvPEssentials extends JavaPlugin {
 
         // Hashmap to store player data by UUID.
         database = new HashMap<UUID, PlayerData>();
+        killStreaks = new HashMap<Integer, KillStreak>();
 
         // Kill message hashmap. Kill message data loaded into here from the config.yml.
         // Linked hashmap so order of hashmap matches order of config so the GUI works correctly.
@@ -53,6 +58,8 @@ public class KitPvPEssentials extends JavaPlugin {
         loadKillMessages();
         loadPlayerData(playerDataFile);
 
+        loadKillStreaks();
+
         getLogger().info("Plugin enabled.");
     }
 
@@ -78,6 +85,19 @@ public class KitPvPEssentials extends JavaPlugin {
             String path = "KillMessages." + label;
             killMessages.put(label, new KillMessage(getConfig().getString(path + ".label"), getConfig().getString(path + ".message"), getConfig().getInt(path + ".order")));
             //getLogger().info(getConfig().getString("KillMessages." + label));
+        }
+    }
+
+    // Load killstreaks from config.
+    private void loadKillStreaks() {
+        for (String label : getConfig().getConfigurationSection("KillStreaks").getKeys(false)) {
+            try {
+                String path = "KillStreaks." + label;
+                getLogger().info("Read data");
+                killStreaks.put(getConfig().getInt(path + ".kills"), new KillStreak(getConfig().getInt(path + ".kills"), getConfig().getString(path + ".message"), new ArrayList<String>(getConfig().getStringList(path + ".commands"))));
+            } catch (Exception e) {
+                getLogger().info("Failed to load killstreak: " + e.toString());
+            }
         }
     }
 
@@ -115,6 +135,10 @@ public class KitPvPEssentials extends JavaPlugin {
         return database;
     }
 
+    public HashMap<Integer, KillStreak> getKillStreaks() {
+        return killStreaks;
+    }
+
     public LinkedHashMap<String, KillMessage> getKillMessages() {
         return killMessages;
     }
@@ -122,6 +146,7 @@ public class KitPvPEssentials extends JavaPlugin {
     public MessageGUI getMessageGUI() {
         return gui;
     }
+
 
 
 }

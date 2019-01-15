@@ -11,3 +11,19 @@ KillMessages:
         label: "&4Rekt"
         message: "&f%killer% &c&orekt &f%victim%. %killstreak%"
         order: 3
+KillStreaks:
+    5:
+      kills: 5
+      message: "&f%player% &anow has a 5 kill streak!"
+      commands:
+        - eco give %player% 5
+    10:
+      kills: 10
+      message: "&f%player% &2now has a 10 kill streak!"
+      commands:
+        - eco give %player% 10
+    15:
+      kills: 15
+      message: "&f%player% &cnow has a 15 kill streak!"
+      commands:
+        - eco give %player% 15

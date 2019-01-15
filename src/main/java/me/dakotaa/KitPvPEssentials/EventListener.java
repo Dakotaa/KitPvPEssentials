@@ -12,16 +12,20 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
 
+import static java.lang.String.valueOf;
+
 public class EventListener implements Listener {
 
     KitPvPEssentials plugin;
     private HashMap<UUID, PlayerData> database;
+    private HashMap<Integer, KillStreak> killStreaks;
     private LinkedHashMap<String, KillMessage> killMessages;
 
     public EventListener(KitPvPEssentials plugin) {
         this.plugin = plugin;
         this.database = plugin.getDatabase();
         this.killMessages = plugin.getKillMessages();
+        killStreaks = plugin.getKillStreaks();
     }
 
     // Create PlayerData object for player on login if they do not have any.
@@ -57,7 +61,6 @@ public class EventListener implements Listener {
             victimData.setHighestStreak(victimData.getCurrentStreak());
         }
 
-        victimData.setCurrentStreak(0);
 
         if (victim.getKiller() != null) {
             Player killer = victim.getKiller();
@@ -76,22 +79,54 @@ public class EventListener implements Listener {
             }
 
             // Display the killer's custom kill message in chat.
-            e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', killerData.getKillMessage().replace("%killer%", killer.getDisplayName()).replace("%victim%", victim.getDisplayName()).replace("%killstreak%", killStreakMessage(killer))));
+            e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', killerData.getKillMessage().replace("%killer%", killer.getDisplayName()).replace("%victim%", victim.getDisplayName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak()))));
+
+            // If the player hit a streak on this kill, set their streak boolean to true.
+            if (streakHit(killerData.getCurrentStreak())) {
+                killerData.setOnStreak(true);
+            }
+
+            // Execute commands when the player hits a streak.
+            if (streakHit(killerData.getCurrentStreak())) {
+                for (String command : getKillStreak(killerData.getCurrentStreak()).getCommands()) {
+                    Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", killer.getName()).replace("%killed%", victim.getName()).replace("%streak%", valueOf(killerData.getCurrentStreak())));
+                }
+            }
+
+            // Broadcast that the victim's streak has been ended by the killer is the victim is on a streak.
+            if (victimData.getOnStreak()) {
+                Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4&l%killer% &c&ljust ended &4&l%victim%'s &c&l%streak% player killstreak!").replace("%killer%", killer.getName()).replace("%victim%", victim.getName()).replace("%streak%", valueOf(victimData.getCurrentStreak())));
+            }
+
         } else {
             // Does not display a kill message if  the player is not killed in PvP.
             e.setDeathMessage(null);
         }
+        victimData.setCurrentStreak(0);
+        victimData.setOnStreak(false);
     }
 
-    // Returns the correct killstreak message string depending on the given player's current killstreak.
-    // TODO: load kill streak tiers, messages, and rewards from config
-    private String killStreakMessage(Player player) {
-        PlayerData playerData = database.get(player.getUniqueId());
-        if (playerData.getCurrentStreak() > 5) {
-            return player.getDisplayName() + " has a 5 killstreak!";
-        }
+    private Boolean streakHit(int streak) {
+        return (killStreaks.keySet().contains(streak));
+    }
 
-        return "";
+    private KillStreak getKillStreak(int streak) {
+        if (killStreaks.keySet().contains(streak)) {
+            return killStreaks.get(streak);
+        } else {
+            return null;
+        }
+    }
+
+    // Returns the killstreak message to use if the player hits a valid killstreak
+    // TODO: load kill streak tiers, messages, and rewards from config
+    private String killStreakMessage(Player player, int streak) {
+        if (streakHit(streak)) {
+            PlayerData playerData = database.get(player.getUniqueId());
+            return getKillStreak(streak).getMessage().replace("%player%", player.getName());
+        } else {
+            return "";
+        }
     }
 
 }

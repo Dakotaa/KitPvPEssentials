@@ -74,6 +74,7 @@ public class Commands implements CommandExecutor {
             } else {
                 sender.sendMessage("K/D Radio: " + (playerData.getKills() / playerData.getDeaths()));
             }
+            sender.sendMessage("Current killsteak: " + playerData.getCurrentStreak());
             sender.sendMessage("Best killstreak: " + playerData.getHighestStreak());
 
         } else {

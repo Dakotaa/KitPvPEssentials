@@ -6,6 +6,7 @@ public class PlayerData {
     private java.util.UUID UUID;
     private String username, killMessage;
     private int kills, deaths, currentStreak, highestStreak;
+    Boolean onStreak;
     public PlayerData(UUID UUID, String username, String killMessage, int kills, int deaths, int currentStreak, int highestStreak) {
         this.UUID = UUID;
         this.username = username;
@@ -14,6 +15,7 @@ public class PlayerData {
         this.deaths = deaths;
         this.currentStreak = currentStreak;
         this.highestStreak = highestStreak;
+        onStreak = false;
     }
 
     public int getCurrentStreak() {
@@ -26,6 +28,14 @@ public class PlayerData {
 
     public void setKillMessage(String killMessage) {
         this.killMessage = killMessage;
+    }
+
+    public Boolean getOnStreak() {
+        return onStreak;
+    }
+
+    public void setOnStreak(Boolean onStreak) {
+        this.onStreak = onStreak;
     }
 
     public void setCurrentStreak(int currentStreak) {
