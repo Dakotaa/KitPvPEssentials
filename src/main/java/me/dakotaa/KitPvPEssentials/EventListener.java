@@ -47,11 +47,14 @@ public class EventListener implements Listener {
             Player attacker = ((Player) e.getDamager()).getPlayer();
             Player damaged = ((Player) e.getEntity()).getPlayer();
 
+            double hp = damaged.getHealth();
             double dmg = e.getFinalDamage();
 
+            if (hp - dmg <= 0) {
+                dmg = hp;
+            }
+
             database.get(damaged.getUniqueId()).addDamage(attacker.getName(), (float) dmg);
-            Bukkit.getLogger().info(dmg + " damage done to " + damaged.getName() + " by " + attacker.getName());
-            Bukkit.getLogger().info("Total damage done to " + damaged.getName() + " by " + attacker.getName() + ": " + database.get(damaged.getUniqueId()).getDamageByPlayer(attacker.getName()));
         }
     }
 
@@ -72,12 +75,13 @@ public class EventListener implements Listener {
             Bukkit.getLogger().info("Failed to create player data");
         }
 
+        /*
         try { victimData.increaseDeaths(); } catch (Exception ex) { Bukkit.getLogger().info("Failed to increase deaths"); }
 
         if (victimData.getCurrentStreak() > victimData.getHighestStreak()) {
             victimData.setHighestStreak(victimData.getCurrentStreak());
         }
-
+        */
 
         if (victim.getKiller() != null) {
             Player killer = victim.getKiller();
@@ -91,25 +95,30 @@ public class EventListener implements Listener {
             // Display the killer's custom kill message in chat.
             e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', killerData.getKillMessage().replace("%killer%", killer.getDisplayName()).replace("%victim%", victim.getDisplayName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak()))));
 
+            /*
             // If the player hit a streak on this kill, set their streak boolean to true.
             if (streakHit(killerData.getCurrentStreak())) {
                 killerData.setOnStreak(true);
             }
-
+            */
             try {
                 HashMap<String, Float> damagePercents = SplitKill.calculateDamage(victimData.getDamageReceived());
                 Bukkit.getLogger().info("Got damage percents");
-                ArrayList<String> pair = SplitKill.getHighestDamagers(SplitKill.calculateDamage(damagePercents));
+                String highestDamage = SplitKill.getHighestDamager(damagePercents);
+                String secondHighest = SplitKill.getSecondDamager(damagePercents);
                 Bukkit.getLogger().info("Got pairs");
 
-                try {
-                    Bukkit.getLogger().info(pair.get(0));
-                    Bukkit.getLogger().info(valueOf(damagePercents.get(pair.get(0))));
+                SplitKill.ProcessKill(victim, killer,  database, killStreaks);
 
-                    if (pair.get(1) != "") {
-                        Bukkit.getLogger().info("pair1: " + pair.get(1));
-                        Bukkit.getLogger().info(valueOf(damagePercents.get(pair.get(1))));
-                        payDamagers(pair.get(0), damagePercents.get(pair.get(0)), pair.get(1), damagePercents.get(pair.get(1)));
+                /*
+                try {
+                    Bukkit.getLogger().info(highestDamage);
+                    Bukkit.getLogger().info(valueOf(damagePercents.get(highestDamage)));
+
+                    if (secondHighest != "") {
+                        Bukkit.getLogger().info("pair1: " + highestDamage);
+                        Bukkit.getLogger().info(valueOf(damagePercents.get(highestDamage)));
+                        payDamagers(highestDamage, damagePercents.get(highestDamage), secondHighest, damagePercents.get(secondHighest));
                     } else {
                         Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + killer.getName() + " 2.5");
                     }
@@ -121,32 +130,36 @@ public class EventListener implements Listener {
                         }
                     }
 
-                    if (Bukkit.getPlayer(pair.get(1)) != null) {
-                        PlayerData firstData = database.get(Bukkit.getPlayer(pair.get(1)).getUniqueId());
-                        Bukkit.getLogger().info("Increased kills of " + pair.get(1));
+                    if (Bukkit.getPlayer(highestDamage) != null) {
+                        Bukkit.getLogger().info("Most damage: " + highestDamage);
+                        PlayerData firstData = database.get(Bukkit.getPlayer(highestDamage).getUniqueId());
+                        Bukkit.getLogger().info("Increased kills of " + highestDamage);
                         firstData.increaseKills();
                         firstData.increaseStreak();
                     }
 
-                    if (Bukkit.getPlayer(pair.get(0)) != null) {
-                        PlayerData secondData = database.get(Bukkit.getPlayer(pair.get(0)).getUniqueId());
-                        Bukkit.getLogger().info("Increased assists of " + pair.get(0));
+                    if (Bukkit.getPlayer(secondHighest) != null) {
+                        Bukkit.getLogger().info("Second Most damage: " + secondHighest);
+                        PlayerData secondData = database.get(Bukkit.getPlayer(secondHighest).getUniqueId());
+                        Bukkit.getLogger().info("Increased assists of " + secondHighest);
                         secondData.increaseAssists();
                     }
 
                 } catch (Exception er) {
                     Bukkit.getLogger().info("Error paying damagers");
                 }
+                */
             } catch (Exception er) {
-                Bukkit.getLogger().info("Error splitting payout: " + er.toString());
+                Bukkit.getLogger().info("Error splitting kill: " + er.toString());
             }
             // Execute commands when the player hits a streak.
+            /*
             if (streakHit(killerData.getCurrentStreak())) {
                 for (String command : getKillStreak(killerData.getCurrentStreak()).getCommands()) {
                     Bukkit.dispatchCommand(Bukkit.getConsoleSender(), command.replace("%player%", killer.getName()).replace("%killed%", victim.getName()).replace("%streak%", valueOf(killerData.getCurrentStreak())));
                 }
             }
-
+            */
             /*
             // Increase the kills and killstreak of the killer. If their current killstreak is their highest, updates their highest killstreak.
             if ()
