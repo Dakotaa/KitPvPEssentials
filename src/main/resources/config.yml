@@ -1,29 +1,29 @@
 KillMessages:
     default:
         label: "&aDefault"
-        message: "&f%killer% &7killed &f%victim%. %killstreak%"
+        message: "&a&l%killer% &7killed &c&l%victim%. [&a&l%damage%% DMG]"
         order: 1
     smacked:
         label: "&2Smacked"
-        message: "&f%killer% &a&osmacked &f%victim%. %killstreak%"
+        message: "&a&l%killer% &a&osmacked &c&l%victim%. [&a&l%damage%% DMG]"
         order: 2
     rekt:
         label: "&4Rekt"
-        message: "&f%killer% &c&orekt &f%victim%. %killstreak%"
+        message: "&c&l%killer% &c&orekt &a&l%victim%. [&a&l%damage%% DMG]"
         order: 3
 KillStreaks:
     5:
       kills: 5
-      message: "&f%player% &anow has a 5 kill streak!"
+      message: "&a&l%player% &7&lnow has a &4&l5 &7&lplayer kill streak!"
       commands:
         - eco give %player% 5
     10:
       kills: 10
-      message: "&f%player% &2now has a 10 kill streak!"
+      message: "&a&l%player% &7&lnow has a &4&l10 &7&lplayer kill streak!"
       commands:
         - eco give %player% 10
     15:
       kills: 15
-      message: "&f%player% &cnow has a 15 kill streak!"
+      message: "&a&l%player% &7&lnow has a &4&l15 &7&lplayer kill streak!"
       commands:
         - eco give %player% 15

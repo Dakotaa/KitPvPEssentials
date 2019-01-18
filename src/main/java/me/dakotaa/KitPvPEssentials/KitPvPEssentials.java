@@ -27,9 +27,9 @@ public class KitPvPEssentials extends JavaPlugin {
     private PluginFile playerDataFile;
     private MessageGUI gui;
 
+
     @Override
     public void onEnable() {
-
         // Hashmap to store player data by UUID.
         database = new HashMap<UUID, PlayerData>();
         killStreaks = new HashMap<Integer, KillStreak>();
@@ -53,7 +53,6 @@ public class KitPvPEssentials extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new MessageGUI(this), this);
         this.getCommand("kitpvpe").setExecutor(new Commands(this));
 
-
         // Scheduler to write player data every minute.
         BukkitScheduler scheduler = getServer().getScheduler();
         scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
@@ -61,6 +60,15 @@ public class KitPvPEssentials extends JavaPlugin {
                 writePlayerData();
             }
         }, 20L, 1200L);
+
+        // Scheduler to decay damage by players on each player.
+        scheduler.scheduleSyncRepeatingTask(this, new Runnable() {
+            public void run() {
+                for (PlayerData data : database.values()) {
+                    data.decayDamage(0.25f);
+                }
+            }
+        }, 20L, 20L);
 
         loadKillMessages();
         loadPlayerData(playerDataFile);
@@ -70,10 +78,12 @@ public class KitPvPEssentials extends JavaPlugin {
         getLogger().info("Plugin enabled.");
     }
 
+
     public void onDisable() {
         getLogger().info("Plugin disabled.");
         writePlayerData();
     }
+
 
     // Load player data into the database hashmap from the PlayerData.yml file.
     private void loadPlayerData(PluginFile data) {
@@ -86,21 +96,21 @@ public class KitPvPEssentials extends JavaPlugin {
         }
     }
 
+
     // Load the kill message info from the config, placing each configured kill message into the killMessages hashmap.
     private void loadKillMessages() {
         for (String label : getConfig().getConfigurationSection("KillMessages").getKeys(false)) {
             String path = "KillMessages." + label;
             killMessages.put(label, new KillMessage(getConfig().getString(path + ".label"), getConfig().getString(path + ".message"), getConfig().getInt(path + ".order")));
-            //getLogger().info(getConfig().getString("KillMessages." + label));
         }
     }
+
 
     // Load killstreaks from config.
     private void loadKillStreaks() {
         for (String label : getConfig().getConfigurationSection("KillStreaks").getKeys(false)) {
             try {
                 String path = "KillStreaks." + label;
-                getLogger().info("Read data");
                 killStreaks.put(getConfig().getInt(path + ".kills"), new KillStreak(getConfig().getInt(path + ".kills"), getConfig().getString(path + ".message"), new ArrayList<String>(getConfig().getStringList(path + ".commands"))));
             } catch (Exception e) {
                 getLogger().info("Failed to load killstreak: " + e.toString());
@@ -108,10 +118,13 @@ public class KitPvPEssentials extends JavaPlugin {
         }
     }
 
+
     // Write the player data for each player in the database hashmap to the PlayerData.yml file.
     private void writePlayerData() {
         for (UUID UUID: database.keySet()) {
+
             String UUIDs = UUID.toString();
+
             try {
                 playerDataFile.set(UUIDs, UUIDs);
             } catch (Exception e) {
@@ -128,28 +141,35 @@ public class KitPvPEssentials extends JavaPlugin {
             } catch (Exception e) {
                 getLogger().info("Failed to set player data: " + e.toString());
             }
+
         }
 
         playerDataFile.save();
         getLogger().info("Player data saved.");
+
     }
 
+
     // Used to add empty player data to the database hashmap to initialize players without any data.
-    public void createPlayerData(Player p) {
+    void createPlayerData(Player p) {
         database.put(p.getUniqueId(), new PlayerData(p.getUniqueId(), p.getPlayerListName(), killMessages.get("default").getMessage(), 0, 0, 0, 0, 0));
     }
 
-    public HashMap<UUID, PlayerData> getDatabase() {
+
+    HashMap<UUID, PlayerData> getDatabase() {
         return database;
     }
 
-    public HashMap<Integer, KillStreak> getKillStreaks() {
+
+    HashMap<Integer, KillStreak> getKillStreaks() {
         return killStreaks;
     }
 
-    public LinkedHashMap<String, KillMessage> getKillMessages() {
+
+    LinkedHashMap<String, KillMessage> getKillMessages() {
         return killMessages;
     }
+
 
     public MessageGUI getMessageGUI() {
         return gui;

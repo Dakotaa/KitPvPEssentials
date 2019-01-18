@@ -8,8 +8,9 @@ public class PlayerData {
     private String username, killMessage;
     private int kills, deaths, assists, currentStreak, highestStreak;
     private HashMap<String, Float> damageReceived;
-    Boolean onStreak;
-    public PlayerData(UUID UUID, String username, String killMessage, int kills, int assists, int deaths, int currentStreak, int highestStreak) {
+    private Boolean onStreak;
+
+    PlayerData(UUID UUID, String username, String killMessage, int kills, int assists, int deaths, int currentStreak, int highestStreak) {
         this.UUID = UUID;
         this.username = username;
         this.killMessage = killMessage;
@@ -22,7 +23,8 @@ public class PlayerData {
         damageReceived = new HashMap<String, Float>();
     }
 
-    public void addDamage(String username, Float dmg) {
+
+    void addDamage(String username, Float dmg) {
         if (damageReceived.containsKey(username)) {
             damageReceived.put(username, damageReceived.get(username) + dmg);
         } else {
@@ -30,96 +32,135 @@ public class PlayerData {
         }
     }
 
-    public HashMap<String, Float> getDamageReceived() {
+
+    HashMap<String, Float> getDamageReceived() {
         return damageReceived;
     }
+
+
+    // Function to decay damage - removes x damage from each player.
+    void decayDamage(Float x) {
+        for (String name : damageReceived.keySet()) {
+            Float dmg = damageReceived.get(name);
+            if (dmg <= 0) {
+                damageReceived.remove(name);
+            } else {
+                if (dmg - x < 0) {
+                    damageReceived.put(name, 0.0f);
+                } else {
+                    damageReceived.put(name, dmg - x);
+                }
+            }
+        }
+    }
+
 
     public Float getDamageByPlayer(String username) {
         return damageReceived.get(username);
     }
 
-    public void resetDamage() {
+
+    void resetDamage() {
         damageReceived.clear();
     }
 
-    public int getCurrentStreak() {
+
+    int getCurrentStreak() {
         return currentStreak;
     }
 
-    public String getKillMessage() {
+
+    String getKillMessage() {
         return killMessage;
     }
 
-    public void setKillMessage(String killMessage) {
+
+    void setKillMessage(String killMessage) {
         this.killMessage = killMessage;
     }
 
-    public Boolean getOnStreak() {
+
+    Boolean getOnStreak() {
         return onStreak;
     }
 
-    public void setOnStreak(Boolean onStreak) {
+
+    void setOnStreak(Boolean onStreak) {
         this.onStreak = onStreak;
     }
 
-    public void setCurrentStreak(int currentStreak) {
+
+    void setCurrentStreak(int currentStreak) {
         this.currentStreak = currentStreak;
     }
 
-    public void increaseStreak() {
+
+    void increaseStreak() {
         currentStreak++;
     }
 
 
-    public int getHighestStreak() {
+    int getHighestStreak() {
         return highestStreak;
     }
 
-    public void setHighestStreak(int highestStreak) {
+
+    void setHighestStreak(int highestStreak) {
         this.highestStreak = highestStreak;
     }
 
-    public java.util.UUID getUUID() {
+
+    java.util.UUID getUUID() {
 
         return UUID;
     }
+
 
     public String getUsername() {
         return username;
     }
 
-    public int getDeaths() {
+
+    int getDeaths() {
         return deaths;
     }
+
 
     public void setDeaths(int deaths) {
         this.deaths = deaths;
     }
 
-    public void increaseDeaths() {
+
+    void increaseDeaths() {
         deaths++;
     }
 
-    public void increaseKills() {
+
+    void increaseKills() {
         kills++;
     }
 
-    public int getKills() {
+
+    int getKills() {
 
         return kills;
     }
 
-    public int getAssists() {
+
+    int getAssists() {
         return assists;
     }
+
 
     public void setAssists(int a) {
         assists = a;
     }
 
-    public void increaseAssists() {
+
+    void increaseAssists() {
         assists++;
     }
+
 
     public void setKills(int kills) {
         this.kills = kills;

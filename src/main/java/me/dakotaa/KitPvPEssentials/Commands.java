@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
@@ -14,12 +15,11 @@ public class Commands implements CommandExecutor {
     KitPvPEssentials plugin;
     MessageGUI GUI;
     private HashMap<UUID, PlayerData> database;
-    private LinkedHashMap<String, KillMessage> killMessages;
+    static DecimalFormat round = new DecimalFormat("##.00");
 
     public Commands(KitPvPEssentials plugin) {
         this.plugin = plugin;
         this.database = plugin.getDatabase();
-        this.killMessages = plugin.getKillMessages();
     }
 
     public boolean onCommand(CommandSender commandSender, Command command, String s, String[] args) {
@@ -73,7 +73,7 @@ public class Commands implements CommandExecutor {
             if (playerData.getDeaths() == 0) {
                 sender.sendMessage("K/D Radio: " + (playerData.getKills()));
             } else {
-                sender.sendMessage("K/D Radio: " + (playerData.getKills() / playerData.getDeaths()));
+                sender.sendMessage("K/D Radio: " + round.format((playerData.getKills() / playerData.getDeaths())));
             }
             sender.sendMessage("Current killsteak: " + playerData.getCurrentStreak());
             sender.sendMessage("Best killstreak: " + playerData.getHighestStreak());
