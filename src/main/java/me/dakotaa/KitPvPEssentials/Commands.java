@@ -1,6 +1,7 @@
 package me.dakotaa.KitPvPEssentials;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -10,6 +11,8 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.UUID;
+
+import static java.lang.String.valueOf;
 
 public class Commands implements CommandExecutor {
     KitPvPEssentials plugin;
@@ -66,20 +69,26 @@ public class Commands implements CommandExecutor {
 
         if (lookup.hasPlayedBefore()) {
             PlayerData playerData = database.get(lookup.getUniqueId());
-            sender.sendMessage("stats of " + lookup.getDisplayName());
-            sender.sendMessage("Kills: " + playerData.getKills());
-            sender.sendMessage("Assists: " + playerData.getAssists());
-            sender.sendMessage("Deaths: " + playerData.getDeaths());
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-header")).replace("%player%", lookup.getName()));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-kills")).replace("%kills%", valueOf(playerData.getKills())));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-deaths")).replace("%deaths%", valueOf(playerData.getDeaths())));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-assists")).replace("%assists%", valueOf(playerData.getAssists())));
+            if (playerData.getDeaths() == 0) {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-kd")).replace("%ratio%", valueOf(playerData.getKills()/playerData.getDeaths())));
+            } else {
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-kd")).replace("%ratio%", valueOf(round.format(playerData.getKills()/playerData.getDeaths()))));
+            }
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-kd")).replace("%ratio%", valueOf(playerData.getKills())));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-streak")).replace("%streak%", valueOf(playerData.getCurrentStreak())));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-streak-best")).replace("%beststreak%", valueOf(playerData.getHighestStreak())));
             if (playerData.getDeaths() == 0) {
                 sender.sendMessage("K/D Radio: " + (playerData.getKills()));
             } else {
                 sender.sendMessage("K/D Radio: " + round.format((playerData.getKills() / playerData.getDeaths())));
             }
-            sender.sendMessage("Current killsteak: " + playerData.getCurrentStreak());
-            sender.sendMessage("Best killstreak: " + playerData.getHighestStreak());
 
         } else {
-            sender.sendMessage("no data for this player");
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("stats-no-data")));
         }
     }
 

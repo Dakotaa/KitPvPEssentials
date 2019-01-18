@@ -1,0 +1,22 @@
+prefix: '&7&l[&c&lKitPvP&7&l]'
+
+# Local messages sent only to certain player on kill
+damage-done: "&7&lYou did &c&l%damage%% &7&ldamage to &c&l%victim%&7&l."
+kill-player: "&7&lYou got a &c&lkill &7&lfor doing the most damage to &c&l%victim%"
+assist-player: "&7&lYou got an &e&lassist &7&lfor doing the second most damage to &c&l%victim%"
+
+# Global messages on kill
+killstreak-ended: "&4&l%killer% &c&ljust ended &4&l%victim%&7&l's &c&l%streak% &c&lplayer killerstreak!"
+assist-broadcast: "&e&l%assister% &7&lassisted &a&l%killer% &7&lin killing &f%victim%&7&l. [&e&l%damage%% DMG&7&l - &4&l%hp% HP&7&l]"
+finish-broadcast: "&6&l%stealer% &7&lfinished &a&l%killer%&7&l's kill on &c&l%victim%&7&l. [&6&l%damage%% DMG&7&l - &4&l%hp% HP&7&l]"
+
+
+# Stats messages
+stats-header: "&7&lStats of &f&l%player%"
+stats-kills: "&7&lKills: &4&l%kills%"
+stats-deaths: "&7&lDeaths: &4&l%deaths%"
+stats-assists: "&7&lAssists: &4&l%assists%"
+stats-kd: "&7&lK/D Ratio: &4&l%ratio%"
+stats-streak: "&7&lCurrent streak: &4&l%streak%"
+stats-streak-best: "&7&lBest streak: &4&l%beststreak%"
+stats-no-data: "&7&lNo data found for this player."

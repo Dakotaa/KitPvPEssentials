@@ -23,6 +23,7 @@ public class EventListener implements Listener {
     private HashMap<UUID, PlayerData> database;
     private HashMap<Integer, KillStreak> killStreaks;
     static DecimalFormat round = new DecimalFormat("##.00");
+    static DecimalFormat round1 = new DecimalFormat("##.0");
 
     public EventListener(KitPvPEssentials plugin) {
         this.plugin = plugin;
@@ -92,16 +93,16 @@ public class EventListener implements Listener {
                 String secondHighest = SplitKill.getSecondDamager(damagePercents);
 
                 if (victimData.getOnStreak()) {
-                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4&l%killer% &c&ljust ended &4&l%victim%'s &c&l%streak% player killstreak!").replace("%killer%", killer.getName()).replace("%victim%", victim.getName()).replace("%streak%", valueOf(victimData.getCurrentStreak())));
+                    Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("killstreak-ended")).replace("%killer%", killer.getName()).replace("%victim%", victim.getName()).replace("%streak%", valueOf(victimData.getCurrentStreak())));
                 }
 
                 // Handles kill messaging - if the person who got the last hit did the most damage, broadcast their kill message. If they did the second most and more than 20%, announce an assist. If they did less, announce a finish.
                 if (killer.getName().equalsIgnoreCase(highestDamage)) {
-                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', killerData.getKillMessage().replace("%killer%", killer.getName()).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%victim%", victim.getName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak()))));
+                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', killerData.getKillMessage().replace("%killer%", killer.getName()).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%victim%", victim.getName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak())).replace("%hp%", round1.format(killer.getHealth()))));
                 } else if (killer.getName().equalsIgnoreCase(secondHighest) && damagePercents.get(killer.getName()) > 0.2) {
-                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', ("&e&l%assister% &7&lassisted &a&l%killer% &7&lin killing &f%victim%&7&l. [&e&l%damage%% DMG&7&l]").replace("%killer%", highestDamage).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%assister%", secondHighest).replace("%victim%", victim.getName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak()))));
+                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("assist-broadcast").replace("%killer%", highestDamage).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%assister%", secondHighest).replace("%victim%", victim.getName()).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak())).replace("%hp%", round1.format(killer.getHealth()))));
                 } else {
-                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', ("&6&l%stealer% &7&lfinished &a&l%killer%&7&l's kill on &c&l%victim%&7&l. [&6&l%damage%% DMG&7&l]").replace("%stealer%", killer.getName()).replace("%victim%", victim.getName()).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%killer%", highestDamage).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak()))));
+                    e.setDeathMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("finish-broadcast").replace("%stealer%", killer.getName()).replace("%victim%", victim.getName()).replace("%damage%", round.format(damagePercents.get(killer.getName())*100)).replace("%killer%", highestDamage).replace("%killstreak%", killStreakMessage(killer, killerData.getCurrentStreak())).replace("%hp%", round1.format(killer.getHealth()))));
                 }
 
                 SplitKill.ProcessKill(victim, killer,  database, killStreaks);
@@ -118,22 +119,6 @@ public class EventListener implements Listener {
         victimData.setCurrentStreak(0);
         victimData.setOnStreak(false);
         victimData.resetDamage();
-    }
-
-
-    private void payDamagers(String player1, Float player1dmg, String player2, Float player2dmg) {
-        Float payout = 2.5f;
-        Bukkit.getLogger().info("in payDamagers");
-        Bukkit.getLogger().info(valueOf(payout));
-        Float totalPercent = player1dmg + player2dmg;
-        Bukkit.getLogger().info(valueOf(totalPercent));
-        Float payout1 = payout * (player1dmg / totalPercent);
-        Bukkit.getLogger().info(valueOf(payout1));
-        Float payout2 = payout * (player2dmg / totalPercent);
-        Bukkit.getLogger().info(valueOf(payout2));
-
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + player1 + " " + payout1);
-        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "eco give " + player2 + " " + payout2);
     }
 
 

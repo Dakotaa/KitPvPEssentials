@@ -1,15 +1,15 @@
 KillMessages:
     default:
         label: "&aDefault"
-        message: "&a&l%killer% &7killed &c&l%victim%. [&a&l%damage%% DMG]"
+        message: "&a&l%killer% &7killed &c&l%victim% &7&l[&a&l%damage%% DMG &7&l- &4&l%hp% HP&7&l]"
         order: 1
     smacked:
         label: "&2Smacked"
-        message: "&a&l%killer% &a&osmacked &c&l%victim%. [&a&l%damage%% DMG]"
+        message: "&a&l%killer% &a&osmacked &c&l%victim% &7&l[&a&l%damage%% DMG &7&l- &4&l%hp% HP&7&l]"
         order: 2
     rekt:
         label: "&4Rekt"
-        message: "&c&l%killer% &c&orekt &a&l%victim%. [&a&l%damage%% DMG]"
+        message: "&c&l%killer% &c&orekt &a&l%victim% &7&l[&a&l%damage%% DMG &7&l- &4&l%hp% HP&7&l]"
         order: 3
 KillStreaks:
     5:

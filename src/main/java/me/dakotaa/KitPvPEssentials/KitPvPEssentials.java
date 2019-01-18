@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -21,10 +22,11 @@ import static java.lang.String.valueOf;
 
 public class KitPvPEssentials extends JavaPlugin {
 
+    public static HashMap<String, String> messages;
     private HashMap<UUID, PlayerData> database;
     private LinkedHashMap<String, KillMessage> killMessages;
     private HashMap<Integer, KillStreak> killStreaks;
-    private PluginFile playerDataFile;
+    private PluginFile playerDataFile, messageFile;
     private MessageGUI gui;
 
 
@@ -33,6 +35,7 @@ public class KitPvPEssentials extends JavaPlugin {
         // Hashmap to store player data by UUID.
         database = new HashMap<UUID, PlayerData>();
         killStreaks = new HashMap<Integer, KillStreak>();
+        messages = new HashMap<String, String>();
 
         // Kill message hashmap. Kill message data loaded into here from the config.yml.
         // Linked hashmap so order of hashmap matches order of config so the GUI works correctly.
@@ -45,6 +48,15 @@ public class KitPvPEssentials extends JavaPlugin {
         } catch (Exception e) {
             getLogger().info("Failed to load player data file: " + e.toString());
         }
+
+        // Load or create playerdata and config.
+        try {
+            messageFile = new PluginFile(this, "lang.yml", "lang.yml");
+        } catch (Exception e) {
+            getLogger().info("Failed to load lang.yml");
+        }
+
+        loadMessages();
 
         saveDefaultConfig();
 
@@ -118,6 +130,11 @@ public class KitPvPEssentials extends JavaPlugin {
         }
     }
 
+    private void loadMessages() {
+        for (String label : messageFile.getKeys(false)) {
+            messages.put(label, messageFile.getString(label));
+        }
+    }
 
     // Write the player data for each player in the database hashmap to the PlayerData.yml file.
     private void writePlayerData() {
@@ -175,7 +192,8 @@ public class KitPvPEssentials extends JavaPlugin {
         return gui;
     }
 
-
-
+    public HashMap<String, String> getMessages() {
+        return messages;
+    }
 }
 

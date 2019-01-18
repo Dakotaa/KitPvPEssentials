@@ -15,6 +15,7 @@ public class SplitKill {
 
     private static DecimalFormat round = new DecimalFormat("##.00");
 
+
     // Main function to process kills.
     // Given a victim, last hitter, and a reference to the player database, calculates the percent damage, sends messages, runs commands, modifies stats.
     static void ProcessKill(Player victim, Player killer, HashMap<UUID, PlayerData> database, HashMap<Integer, KillStreak> killStreaks) {
@@ -32,7 +33,7 @@ public class SplitKill {
                     Location loc1 = Bukkit.getPlayer(name).getLocation();
                     Location loc2 = victim.getLocation();
                     if (loc1.distance(loc2) < 30) {
-                        Bukkit.getPlayer(name).sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&lYou did &c&l" + round.format(damagePercent.get(name) * 100) + "% &7&ldamage to &a&l" + victim.getName() + "&7&l."));
+                        Bukkit.getPlayer(name).sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("damage-done").replace("%damage%", round.format(damagePercent.get(name) * 100)).replace("%victim%", victim.getName())));
                     }
                 }
             }
@@ -53,7 +54,7 @@ public class SplitKill {
 
         // If the victim was on a streak, announces that their streak has been ended by the killer.
         if (victimData.getOnStreak()) {
-            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', "&4&l%killer% &c&ljust ended &4&l%victim%'s &c&l%streak% player killstreak!").replace("%killer%", killer.getName()).replace("%victim%", victim.getName()).replace("%streak%", valueOf(victimData.getCurrentStreak())));
+            Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("killstreak-ended")).replace("%killer%", killer.getName()).replace("%victim%", victim.getName()).replace("%streak%", valueOf(victimData.getCurrentStreak())));
         }
 
         // Splits the pay between the top 1-2 damagers based on percent damage done.
@@ -74,7 +75,7 @@ public class SplitKill {
             killerData.increaseKills();
             killerData.increaseStreak();
 
-            killer.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&lYou got the &c&lkill &7&lfor doing the most damage to &a&l" + victim + "&7&l."));
+            killer.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("kill-player")).replace("%victim%", victim));
 
             if (killerData.getCurrentStreak() > killerData.getHighestStreak()) {
                 killerData.setHighestStreak(killerData.getCurrentStreak());
@@ -102,7 +103,7 @@ public class SplitKill {
             PlayerData assisterData = database.get(assister.getUniqueId());
 
             assisterData.increaseAssists();
-            assister.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7&lYou got the &e&lassist &7&lfor doing the second most damage to &a&l" + victim + "&7&l."));
+            assister.sendMessage(ChatColor.translateAlternateColorCodes('&', KitPvPEssentials.messages.get("assist-player")).replace("%victim%", victim));
         }
     }
 
